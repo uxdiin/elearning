@@ -22,9 +22,9 @@ Route::post('/login','Auth\LoginController@login');
 Route::get('/announcements','AnnouncementController@index')->middleware('auth:api');
 Route::post('/add-announcement','AnnouncementController@store');
 
-Route::post('add-student','UserController@store');
+Route::post('add-user','UserController@store');
 Route::get('/students','UserController@index');
-Route::put('/edit-student','UserController@update');
+Route::put('/edit-user','UserController@update');
 
 Route::post('/add-problem','ProblemController@store');
 Route::get('/problems','ProblemController@index');
