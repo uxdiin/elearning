@@ -23,11 +23,15 @@ Route::get('/announcements','AnnouncementController@index')->middleware('auth:ap
 Route::post('/add-announcement','AnnouncementController@store');
 
 Route::post('add-user','UserController@store');
-Route::get('/students','UserController@index');
+
+Route::get('/students','UserController@index')->middleware('auth:api');
 Route::put('/edit-user','UserController@update');
+Route::get('/get-all-student','UserController@getAllUser');
 
 Route::post('/add-problem','ProblemController@store');
 Route::get('/problems','ProblemController@index');
 Route::get('/problems-ready','ProblemController@indexReady');
+Route::get('/problem-numbers-ready','ProblemNumberController@indexReady')->middleware('auth:api');
 
 Route::post('/add-answers','AnswerController@store');
+Route::post('/nilai','AnswerController@nilai');

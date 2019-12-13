@@ -16,4 +16,9 @@ class AnswerController extends Controller
         $answerNumberController = new AnswerNumberController();
         $answerNumberController->store($request,$answer_id);
     }
+    public function nilai(Request $request){
+        $answer = Answer::findOrFail($request->id);
+        $answer->nilai = $request->get('nilai');
+        $answer->save();
+    }
 }
