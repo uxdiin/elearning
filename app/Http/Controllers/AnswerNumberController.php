@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class AnswerNumberController extends Controller
 {
+    public function indexByAnswers(Request $request)
+    {
+        $answer_numbers = Answer_Number::where('answer_id',$request->get('answer_id'));
+        return $answer_numbers;
+    }
     public function store(Request $request, $problem_id){
 
         $answer_numbers = $request->get('answer_numbers');

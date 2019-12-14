@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ProblemNumberReadyResources;
+use App\Problem;
 use App\Problem_Number;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,7 @@ class ProblemNumberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
+
     public function indexReady(Request $request){
         $problem_numbers = Problem_Number::where('problem_id',$request->get('problem_id'))->get();
         return ProblemNumberReadyResources::collection($problem_numbers);

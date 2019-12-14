@@ -31,7 +31,8 @@ Route::get('/get-all-student','UserController@getAllUser');
 Route::post('/add-problem','ProblemController@store');
 Route::get('/problems','ProblemController@index');
 Route::get('/problems-ready','ProblemController@indexReady');
-Route::get('/problem-numbers-ready','ProblemNumberController@indexReady')->middleware('auth:api');
+Route::post('/problem-numbers-ready','ProblemNumberController@indexReady')->middleware('auth:api');
 
 Route::post('/add-answers','AnswerController@store');
+Route::get('/answers','ProblemNumberController@indexReady')->middleware('auth:api');
 Route::post('/nilai','AnswerController@nilai');
