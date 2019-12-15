@@ -6,6 +6,7 @@ use App\Answer;
 use App\User;
 use App\Http\Resources\AnswerResources;
 use Illuminate\Http\Request;
+use Exception;
 
 class AnswerController extends Controller
 {
@@ -30,13 +31,27 @@ class AnswerController extends Controller
         // return $answerObj;
     }
     public function store(Request $request){
-        $new_answer = new Answer();
-        $new_answer->problem_id = $request->get('problem_id');
-        $new_answer->user_id = $request->get('user_id');
-        $new_answer->save();
-        $answer_id = $new_answer->id;
-        $answerNumberController = new AnswerNumberController();
-        $answerNumberController->store($request,$answer_id);
+        try{
+            $new_answer = new Answer();
+            $new_answer->problem_id = $request->get('problem_id');
+            $new_answer->user_id = $request->get('user_id');
+            $new_answer->save();
+            $answer_id = $new_answer->id;
+            $answerNumberController = new AnswerNumberController();
+            $answerNumberController->store($request,$answer_id);
+            $message = [
+                'status' =>200,
+                'message'=> "berhasil menambah jawaban"
+            ];
+            return response()->json($message);
+        }catch(Exception $e){
+            $message = [
+                'status' =>500,
+                'message'=> "gagal menambah jawaban"
+            ];
+            return response()->json($message);
+        }
+
     }
     public function nilai(Request $request){
         $answer = Answer::findOrFail($request->id);
