@@ -18,21 +18,29 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/login','Auth\LoginController@login');
+Route::post('/login-api','Auth\LoginController@loginApi');
 
 Route::get('/announcements','AnnouncementController@index')->middleware('auth:api');
-Route::post('/add-announcement','AnnouncementController@store');
+Route::post('/add-announcement','AnnouncementController@store')->middleware('auth:api');
 
-Route::post('add-user','UserController@store');
+Route::post('add-user','UserController@store')->middleware('auth:api');
 
 Route::get('/students','UserController@index')->middleware('auth:api');
-Route::put('/edit-user','UserController@update');
-Route::get('/get-all-student','UserController@getAllUser');
+Route::get('/students-api','UserController@indexApi')->middleware('auth:api');
+Route::put('/edit-user','UserController@update')->middleware('auth:api');
+Route::get('/get-all-student','UserController@getAllUser')->middleware('auth:api');
+Route::get('/get-all-teacher','UserController@getAllTeacher')->middleware('auth:api');
 
-Route::post('/add-problem','ProblemController@store');
-Route::get('/problems','ProblemController@index');
-Route::get('/problems-ready','ProblemController@indexReady');
+Route::post('/add-problem','ProblemController@store')->middleware('auth:api');
+Route::get('/problems','ProblemController@index')->middleware('auth:api');
+Route::get('/problems-ready','ProblemController@indexReady')->middleware('auth:api');
 Route::post('/problem-numbers-ready','ProblemNumberController@indexReady')->middleware('auth:api');
 
-Route::post('/add-answers','AnswerController@store');
-Route::get('/answers','ProblemNumberController@indexReady')->middleware('auth:api');
-Route::post('/nilai','AnswerController@nilai');
+Route::post('/add-answers','AnswerController@store')->middleware('auth:api');
+Route::get('/answers','AnswerController@indexByProblem')->middleware('auth:api');
+Route::post('/answer-numbers','AnswerNumberController@indexByAnswers')->middleware('auth:api');
+Route::post('/nilai','AnswerController@nilai')->middleware('auth:api');
+
+Route::post('check-answer','CheckAnswerController@check')->middleware('auth:api');
+
+Route::get('/search-score','ScoreController@search')->middleware('auth:api');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Auth;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,25 +19,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function getAllUser()
     {
-        // return Article::all();
-        // return ArticleResource::collection(Article::all());
-        // $client = new Client(['base_uri' => 'http://192.168.137.237:8000']);
-
-        // $headers = ['headers' =>
-        //     [
-        //         'Authorization' => 'Bearer A',
-        //         'Accept'=> 'application/json; charset=utf-8',
-        //     ]
-        // ];
-
-        // $send = $client->request('GET', '/api/data', $headers);
-
-        // $response = $send->getBody();
-
         $curl = curl_init();
-        $prov = "http://192.168.1.7:8000/api/Data";
+        $prov = "http://".Auth::$ip."/api/Akademik";
 
         curl_setopt_array($curl, array(
         CURLOPT_URL => $prov,
@@ -47,17 +35,42 @@ class UserController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer A"
+            "Authorization: Bearer ".Auth::$apiKey,
         ),
         ));
 
         $response = curl_exec($curl);
         return $response;
     }
+
+    public function getAllTeacher(){
+        $curl = curl_init();
+        $prov = "http://".Auth::$ip."/api/Dosen";
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $prov,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer ".Auth::$apiKey,
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        return $response;
+    }
+
+
     public function index()
     {
-        // return view('users.index');
         return UserResource::collection(User::All());
+    }
+    public function indexApi(){
+        return $this->getAllUser();
     }
 
     /**

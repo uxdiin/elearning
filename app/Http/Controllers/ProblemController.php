@@ -6,6 +6,7 @@ use App\Http\Resources\ProblemReadyResources;
 use App\Http\Resources\ProblemResources;
 use Illuminate\Support\Facades\DB;
 use App\Problem;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProblemController extends Controller
@@ -51,17 +52,23 @@ class ProblemController extends Controller
      */
     public function store(Request $request)
     {
-        $new_problem = new Problem();
-        $new_problem->title = $request->get('title');
-        $new_problem->start_time = $request->get('start_time');
-        $new_problem->start_date = $request->get('start_date');
-        $new_problem->end_time = $request->get('end_time');
-        $new_problem->end_date = $request->get('end_date');
-        $new_problem->save();
-        $problem_id = $new_problem->id;
-        $problemNumberController = new ProblemNumberController();
-        $problemNumberController->store($request,$problem_id);
-        return $request;
+        try{
+            $new_problem = new Problem();
+            $new_problem->title = $request->get('title');
+            $new_problem->start_time = $request->get('start_time');
+            $new_problem->start_date = $request->get('start_date');
+            $new_problem->end_time = $request->get('end_time');
+            $new_problem->end_date = $request->get('end_date');
+            $new_problem->save();
+            $problem_id = $new_problem->id;
+            $problemNumberController = new ProblemNumberController();
+            $problemNumberController->store($request,$problem_id);
+            return response()->json(['status'=>200,'message'=>'berhasil menambah soal']);
+        }catch(Exception $e){
+            
+            return response()->json(['status'=>500,'message'=>'gagal menambah soal']);
+        }
+        
     }
 
     /**
