@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\app",
+    "\\app\\Http",
+    "\\app\\Http\\Controllers",
     "\\routes"
   ],
-  "SelectedNode": "\\routes\\api.php",
+  "SelectedNode": "\\app\\Http\\Controllers\\AnswerController.php",
   "PreviewInSolutionExplorer": false
 }
