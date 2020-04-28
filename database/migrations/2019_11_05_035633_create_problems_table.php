@@ -20,6 +20,7 @@ class CreateProblemsTable extends Migration
             $table->date('start_date');
             $table->time('end_time');
             $table->date('end_date');
+            $table->integer('class_id');
             $table->timestamps();
         });
     }

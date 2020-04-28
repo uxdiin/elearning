@@ -41,6 +41,9 @@ Route::get('/answers','AnswerController@indexByProblem')->middleware('auth:api')
 Route::post('/answer-numbers','AnswerNumberController@indexByAnswers')->middleware('auth:api');
 Route::post('/nilai','AnswerController@nilai')->middleware('auth:api');
 
+Route::get('/classes','ClassController@index')->middleware('auth:api');
+Route::post('/add-class','ClassController@store')->middleware('auth:api');
+
 Route::post('check-answer','CheckAnswerController@check')->middleware('auth:api');
 
 Route::get('/search-score','ScoreController@search')->middleware('auth:api');
