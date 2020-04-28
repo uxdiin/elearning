@@ -16,9 +16,9 @@ class ProblemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return ProblemResources::Collection(Problem::All());
+        return ProblemResources::Collection(Problem::where('class_id',$request->get('class_id')));
     }
     public function indexReady(){
         return ProblemReadyResources::Collection(Problem::where('start_date','<=',DB::raw('curdate()'))
