@@ -41,7 +41,8 @@ Route::get('/answers','AnswerController@indexByProblem')->middleware('auth:api')
 Route::post('/answer-numbers','AnswerNumberController@indexByAnswers')->middleware('auth:api');
 Route::post('/nilai','AnswerController@nilai')->middleware('auth:api');
 
-Route::get('/classes','ClassController@index')->middleware('auth:api');
+Route::get('/classes-teacher','ClassController@indexByTeacher')->middleware('auth:api');
+Route::get('/classes-student','ClassController@indexByStudent')->middleware('auth:api');
 Route::post('/add-class','ClassController@store')->middleware('auth:api');
 Route::get('/find-class','JoinClassController@index')->middleware('auth:api');
 Route::post('/join-class','JoinClassController@join')->middleware('auth:api');
