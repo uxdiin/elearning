@@ -18,6 +18,7 @@ class ClassController extends Controller
             $newClass->name = $request->get("name");
             $newClass->code = $request->get("code");
             $newClass->teacher_id = $request->get("teacher_id");
+            $newClass->description = $request->get("description");
             $newClass->save();   
             return response()->json(['status'=>200,'message'=>'berhasil menambah kelas','data'=>$newClass]);
         }catch(Exception $e){

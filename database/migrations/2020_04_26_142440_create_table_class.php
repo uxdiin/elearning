@@ -17,6 +17,7 @@ class CreateTableClass extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('code');
+            $table->string('description');
             $table->string('teacher_id');
             $table->timestamps();
         });

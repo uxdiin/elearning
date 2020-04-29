@@ -43,6 +43,8 @@ Route::post('/nilai','AnswerController@nilai')->middleware('auth:api');
 
 Route::get('/classes','ClassController@index')->middleware('auth:api');
 Route::post('/add-class','ClassController@store')->middleware('auth:api');
+Route::get('/find-class','JoinClassController@index')->middleware('auth:api');
+Route::post('/join-class','JoinClassController@join')->middleware('auth:api');
 
 Route::post('check-answer','CheckAnswerController@check')->middleware('auth:api');
 
