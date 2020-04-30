@@ -46,6 +46,7 @@ Route::get('/classes-student','ClassController@indexByStudent')->middleware('aut
 Route::post('/add-class','ClassController@store')->middleware('auth:api');
 Route::get('/find-class','JoinClassController@index')->middleware('auth:api');
 Route::post('/join-class','JoinClassController@join')->middleware('auth:api');
+Route::get('/student-in-class','UserController@getStudentByClass')->middleware('auth:api');
 
 Route::post('check-answer','CheckAnswerController@check')->middleware('auth:api');
 

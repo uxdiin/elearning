@@ -14,7 +14,7 @@ class ClassController extends Controller
         return ClassResources::collection(CClass::where('teacher_id',$request->teacher_id)->get());
     }
     public function indexByStudent(Request $request){
-        $class_member = Class_Member::findOrFail($request->user_id);
+        $class_member = Class_Member::where('user_id',$request->user_id)->first();
         return ClassResources::collection($class_member->cclass()->get());
     }
     

@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Class_Member;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\GuzzleResponseParser;
@@ -20,7 +21,24 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+    public function getStudentByClass(Request $request){
+        // $students = $this->getAllUser();
+        // $students = $students['data'];
+        // dd($students);
+        // $studentsInClass = [];
+        // foreach($students as $student){
+        //     $exits = Class_Member::where('class_id',$request->class_id)->where('user_id',$student-get('id'))->get();
+        //     if(count($exits)!=0){            
+        //         $studentsInClass[] = [
+        //             'Nama'=>$student->get("Nama"),
+        //             'Email'=>$student->get("Nama"),
+        //             'Password'=>$student->get("Nama"),
+        //             'id'=>$student->get("Nama"),
+        //         ];
+        //     }
+        // }
+        return $this->getAllUser();
+    }
     public function getAllUser()
     {
         $curl = curl_init();
