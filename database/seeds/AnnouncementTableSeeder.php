@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use\App\Announcement;
 
 class AnnouncementTableSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class AnnouncementTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Announcement::create([
+            'name'=>'uxdiin',
+            'date'=>'122131',
+            'text'=>'Banyak tugas guys',
+            'class_id'=>1
+        ]);
     }
 }
