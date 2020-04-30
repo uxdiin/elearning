@@ -19,6 +19,7 @@ class AnnouncementResources extends JsonResource
             'name'=>$this->name,
             'date'=>$this->date,
             'text'=>$this->text,
+            'class_id'=>$this->class_id
         ];
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 class ClassController extends Controller
 {
     public function indexByTeacher(Request $request){
-        return ClassResources::collection(CClass::where('teacher_id',$request->teacher_id));
+        return ClassResources::collection(CClass::where('teacher_id',$request->teacher_id)->get());
     }
     public function indexByStudent(Request $request){
         $class_member = Class_Member::findOrFail($request->user_id);

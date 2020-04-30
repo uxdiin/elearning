@@ -14,9 +14,9 @@ class AnnouncementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return AnnouncementResources::collection(Announcement::All());
+        return AnnouncementResources::collection(Announcement::where('class_id',$request->class_id)->get());
     }
 
     /**
@@ -42,6 +42,7 @@ class AnnouncementController extends Controller
             $new_Announcement->name = $request->get('name');
             $new_Announcement->date = $request->get('date');
             $new_Announcement->text = $request->get('text');
+            $new_Announcement->class_id = $request->get('class_id');
             $new_Announcement->save();
             $message = [
                 'status'=>200,
