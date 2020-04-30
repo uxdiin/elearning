@@ -22,22 +22,24 @@ class UserController extends Controller
      */
 
     public function getStudentByClass(Request $request){
-        // $students = $this->getAllUser();
-        // $students = $students['data'];
+        $students = $this->getAllUser();
         // dd($students);
-        // $studentsInClass = [];
-        // foreach($students as $student){
-        //     $exits = Class_Member::where('class_id',$request->class_id)->where('user_id',$student-get('id'))->get();
-        //     if(count($exits)!=0){            
-        //         $studentsInClass[] = [
-        //             'Nama'=>$student->get("Nama"),
-        //             'Email'=>$student->get("Nama"),
-        //             'Password'=>$student->get("Nama"),
-        //             'id'=>$student->get("Nama"),
-        //         ];
-        //     }
-        // }
-        return $this->getAllUser();
+        $students = json_decode($students);
+        $students = $students->data;
+        $studentsInClass = [];
+        foreach($students as $student){
+            $exits = Class_Member::where('class_id',$request->class_id)->where('user_id',$student->id)->get();
+            if(count($exits)!=0){            
+                $studentsInClass[] = [
+                    'Nama'=>$student->Nama,
+                    'Email'=>$student->Email,
+                    'Password'=>$student->Password,
+                    'id'=>$student->id,
+                ];
+            }
+        }
+        
+        return UserResource::collection(collect($studentsInClass));
     }
     public function getAllUser()
     {
