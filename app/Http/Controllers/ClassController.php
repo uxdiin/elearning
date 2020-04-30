@@ -14,8 +14,18 @@ class ClassController extends Controller
         return ClassResources::collection(CClass::where('teacher_id',$request->teacher_id)->get());
     }
     public function indexByStudent(Request $request){
-        $class_member = Class_Member::where('user_id',$request->user_id)->get();
-        return ClassResources::collection($class_member->cclass()->get());
+        $class_members = Class_Member::where('user_id',$request->user_id)->with('cclass')->get();
+        $members = [];
+        foreach($class_members as $class_member){
+            $members[] = [
+                'id'=>$class_member->cclass->id,
+                'name'=>$class_member->cclass->name,
+                'code'=>$class_member->cclass->code,
+                'description'=>$class_member->cclass->description,
+            ];
+        }
+        // return $class_members;
+        return ClassResources::collection(collect($members));
     }
     
     public function store(Request $request){
