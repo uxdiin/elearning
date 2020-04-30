@@ -18,13 +18,14 @@ class ProblemController extends Controller
      */
     public function index(Request $request)
     {
-        return ProblemResources::Collection(Problem::where('class_id',$request->get('class_id')));
+        return ProblemResources::Collection(Problem::where('class_id',$request->get('class_id'))->get());
     }
     public function indexReady(){
         return ProblemReadyResources::Collection(Problem::where('start_date','<=',DB::raw('curdate()'))
                                                         ->where('end_date','>=',DB::raw('curdate()'))
                                                         ->where('start_time','<=',DB::raw('curtime()'))
                                                         ->where('end_time','>=',DB::raw('curtime()'))
+                                                        ->where('class_id',$request->class_id)
                                                         ->orwhere(function($query){
                                                              $query->where('end_date','!=',DB::raw('curdate()'))
                                                              ->where('start_date','<=',DB::raw('curdate()'))
@@ -59,6 +60,7 @@ class ProblemController extends Controller
             $new_problem->start_date = $request->get('start_date');
             $new_problem->end_time = $request->get('end_time');
             $new_problem->end_date = $request->get('end_date');
+            $new_problem->class_id = $request->get('class_id');
             $new_problem->save();
             $problem_id = $new_problem->id;
             $problemNumberController = new ProblemNumberController();
