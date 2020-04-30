@@ -22,7 +22,7 @@ class JoinClassController extends Controller
     public function join(Request $request){
         try{
             $class = CClass::where('code',$request->get('code'))->first();
-            $classMember = Class_Member::where('user_id',$request->get('user_id'))->get();
+            $classMember = Class_Member::where('class_id',$request->class_id)->where('user_id',$request->get('user_id'))->get();
             $message = "";
             if(count($classMember)==0){
                 $classMember = Class_Member::create([
