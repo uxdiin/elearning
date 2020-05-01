@@ -17,7 +17,7 @@ class ProblemTableSeeder extends Seeder
             'start_time'=>'23:02:00',
             'start_date'=>'2020-04-30',
             'end_time'=>'23:02:00',
-            'end_date'=>'2020-04-30',
+            'end_date'=>'2020-07-30',
             'class_id'=>1,
 
         ]);

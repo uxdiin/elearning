@@ -20,7 +20,7 @@ class ProblemController extends Controller
     {
         return ProblemResources::Collection(Problem::where('class_id',$request->get('class_id'))->get());
     }
-    public function indexReady(){
+    public function indexReady(Request $request){
         return ProblemReadyResources::Collection(Problem::where('start_date','<=',DB::raw('curdate()'))
                                                         ->where('end_date','>=',DB::raw('curdate()'))
                                                         ->where('start_time','<=',DB::raw('curtime()'))

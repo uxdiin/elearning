@@ -41,6 +41,9 @@ class AnswerController extends Controller
     }
     public function store(Request $request){
         try{
+            // if(){
+            //     Answer::where('problem_id',$request->problem_id)->where('user_id')
+            // }
             $new_answer = new Answer();
             $new_answer->problem_id = $request->get('problem_id');
             $new_answer->user_id = $request->get('user_id');
