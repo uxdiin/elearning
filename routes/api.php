@@ -40,6 +40,7 @@ Route::post('/add-answers','AnswerController@store')->middleware('auth:api');
 Route::get('/answers','AnswerController@indexByProblem')->middleware('auth:api');
 Route::post('/answer-numbers','AnswerNumberController@indexByAnswers')->middleware('auth:api');
 Route::post('/nilai','AnswerController@nilai')->middleware('auth:api');
+Route::get('/answer/show','AnswerController@show')->middleware('auth:api');
 
 Route::get('/classes-teacher','ClassController@indexByTeacher')->middleware('auth:api');
 Route::get('/classes-student','ClassController@indexByStudent')->middleware('auth:api');

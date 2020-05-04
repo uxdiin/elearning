@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Http\Request;
 use App\Answer;
 use App\User;
 use App\Http\Resources\AnswerResources;
-use Illuminate\Http\Request;
+use App\Http\Resources\AnswerNumberResources;
 use Exception;
 
 class AnswerController extends Controller
@@ -41,21 +43,32 @@ class AnswerController extends Controller
     }
     public function store(Request $request){
         try{
-            // if(){
-            //     Answer::where('problem_id',$request->problem_id)->where('user_id')
-            // }
-            $new_answer = new Answer();
-            $new_answer->problem_id = $request->get('problem_id');
-            $new_answer->user_id = $request->get('user_id');
-            $new_answer->save();
-            $answer_id = $new_answer->id;
-            $answerNumberController = new AnswerNumberController();
-            $answerNumberController->store($request,$answer_id);
-            $message = [
-                'status' =>200,
-                'message'=> "berhasil menambah jawaban"
-            ];
-            return response()->json($message);
+            $answer = Answer::where('problem_id',$request->problem_id)->where('user_id',$request->user_id)->first();
+            // dump($answer);
+            if($answer!=null){
+                $answer_id = $answer->id;
+                $answerNumberController = new AnswerNumberController();
+                $answerNumberController->store($request,$answer_id);
+                $message = [
+                    'status' =>200,
+                    'message'=> "berhasil menambah jawaban"
+                ];
+                return response()->json($message);    
+            }else{
+                $new_answer = new Answer();
+                $new_answer->problem_id = $request->get('problem_id');
+                $new_answer->user_id = $request->get('user_id');
+                $new_answer->save();
+                $answer_id = $new_answer->id;
+                $answerNumberController = new AnswerNumberController();
+                $answerNumberController->store($request,$answer_id);
+                $message = [
+                    'status' =>200,
+                    'message'=> "berhasil menambah jawaban"
+                ];
+                return response()->json($message);
+            }
+            
         }catch(Exception $e){
             $message = [
                 'status' =>500,
@@ -64,6 +77,16 @@ class AnswerController extends Controller
             return response()->json($message);
         }
 
+    }
+    public function show(Request $request){
+        $answer = Answer::where('user_id',$request->user_id)->where('problem_id',$request->problem_id)->with('answerNumber')->first();
+        // dd($answer);
+        if($answer!=null){
+            $answerNumbers = $answer->answerNumber;
+            return AnswerNumberResources::collection(collect($answerNumbers));
+        }else{
+            return AnswerNumberResources::collection(collect([]));
+        }
     }
     public function nilai(Request $request){
         try{
