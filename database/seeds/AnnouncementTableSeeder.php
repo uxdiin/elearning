@@ -14,7 +14,7 @@ class AnnouncementTableSeeder extends Seeder
     {
         Announcement::create([
             'name'=>'uxdiin',
-            'date'=>'122131',
+            'date'=>'2020/05/02',
             'text'=>'Banyak tugas guys',
             'class_id'=>1
         ]);

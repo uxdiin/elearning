@@ -88,6 +88,15 @@ class AnswerController extends Controller
             return AnswerNumberResources::collection(collect([]));
         }
     }
+    public function showNilai(Request $request){
+        $answer = Answer::where('user_id',$request->user_id)->where('problem_id',$request->problem_id)->get();
+        // dd($answer);
+        if($answer!=null){
+            return $answer;
+        }else{
+            return $answer;
+        }
+    }
     public function nilai(Request $request){
         try{
             $answer = Answer::findOrFail($request->answer_id);
