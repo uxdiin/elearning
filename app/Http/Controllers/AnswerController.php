@@ -91,10 +91,10 @@ class AnswerController extends Controller
     public function showNilai(Request $request){
         $answer = Answer::where('user_id',$request->user_id)->where('problem_id',$request->problem_id)->get();
         // dd($answer);
-        if($answer!=null){
-            return $answer;
+        if(count($answer)!=0){
+            return AnswerResources::collection($answer);
         }else{
-            return $answer;
+            return AnswerResources::collection(collect([]));
         }
     }
     public function nilai(Request $request){
