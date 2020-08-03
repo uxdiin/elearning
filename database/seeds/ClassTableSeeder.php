@@ -14,9 +14,9 @@ class ClassTableSeeder extends Seeder
     {
         CClass::create([
             'id'=>1,
-            'name'=> 'Algoritma',
+            'name'=> 'Aqidah',
             'code'=> '1231',
-            'description'=> 'KElas Algortima Pemrograman',
+            'description'=> 'Kelas Aqidah Bukan Filsafat',
             'teacher_id'=>11
         ]);
     }
